@@ -15,18 +15,24 @@ def pretty_print_json(json_data):
 def validate_file_path():
     if len(sys.argv) < 2:
         print("Please write argument file path")
-        return None
+        return False
     elif not os.path.isfile(sys.argv[1]):
         print("File not exist")
-        return None
+        return False
     elif not os.access(sys.argv[1], os.R_OK):
         print("File is not readable")
-        return None
+        return False
     else:
-        return 1
+        return True
 
 
 if __name__ == '__main__':
-    if validate_file_path():
-        json_data = load_data(sys.argv[1])
-        pretty_print_json(json_data)
+    try:
+        if validate_file_path():
+            json_data = load_data(sys.argv[1])
+            pretty_print_json(json_data)
+    except ValueError as error:
+        print('Invalid json: %s' % error)
+    except Exception as error:
+        print('Caught such error: %s' % error)
+
