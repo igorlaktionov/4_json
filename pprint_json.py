@@ -33,6 +33,4 @@ if __name__ == '__main__':
             pretty_print_json(json_data)
     except ValueError as error:
         print('Invalid json: %s' % error)
-    except Exception as error:
-        print('Caught such error: %s' % error)
 
